@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Güclü Şifrə Generatoru</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to top, darkcyan, black);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #333;
+      color: #f4f4f9;
+    }
+
+    .container {
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      width: 100%;
+    }
+
+    body.dark-mode .container {
+      background-color: red;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    #password {
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      text-align: center;
+      background: none;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: red;
+    }
+
+    .options {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .theme-switch {
+      left: 5px;
+      top: 5px;
+      position: absolute;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 300px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Güclü Şifrə Generatoru</h1>
+    <input type="text" id="password" readonly onclick="copyPassword()">
+    <button onclick="generatePassword()">Şifrə Yarat</button>
+    
+    <div class="options">
+      <label>
+        <input type="checkbox" id="includeUppercase" checked>
+        Böyük Hərflər
+      </label>
+      <label>
+        <input type="checkbox" id="includeLowercase" checked>
+        Kiçik Hərflər
+      </label>
+      <label>
+        <input type="checkbox" id="includeNumbers" checked>
+        Rəqəmlər
+      </label>
+      <label>
+        <input type="checkbox" id="includeSymbols" checked>
+        Simvollar
+      </label>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>Şifrə Kopyalandı!</p>
+      <button onclick="closeModal()">Bağla</button>
+    </div>
+  </div>
+
+  <script>
+
+    function generatePassword() {
+      const length = 12; 
+      const includeUppercase = document.getElementById('includeUppercase').checked;
+      const includeLowercase = document.getElementById('includeLowercase').checked;
+      const includeNumbers = document.getElementById('includeNumbers').checked;
+      const includeSymbols = document.getElementById('includeSymbols').checked;
+
+      let characters = '';
+      if (includeUppercase) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if (includeLowercase) characters += 'abcdefghijklmnopqrstuvwxyz';
+      if (includeNumbers) characters += '0123456789';
+      if (includeSymbols) characters += '!@#$%^&*()-_=+[]{}|;:,.<>?/';
+
+      if (characters === '') {
+        alert('Ən az bir seçim etməlisiniz!');
+        return;
+      }
+
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        password += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+
+      document.getElementById('password').value = password;
+    }
+
+    function copyPassword() {
+      const passwordInput = document.getElementById('password');
+      passwordInput.select();
+      document.execCommand('copy');
+
+      showModal();
+    }
+
+
+    function showModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.add('show');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

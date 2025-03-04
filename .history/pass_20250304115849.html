@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Güçlü Şifre Oluşturucu</title>
+<style>
+    
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Güçlü Şifre Oluşturucu</h1>
+    <input type="text" id="password" readonly>
+    <button onclick="generatePassword()">Şifre Oluştur</button>
+    <div class="options">
+      <label>
+        <input type="checkbox" id="includeUppercase" checked>
+        Büyük Harf
+      </label>
+      <label>
+        <input type="checkbox" id="includeLowercase" checked>
+        Küçük Harf
+      </label>
+      <label>
+        <input type="checkbox" id="includeNumbers" checked>
+        Sayılar
+      </label>
+      <label>
+        <input type="checkbox" id="includeSymbols" checked>
+        Simge Karakterler
+      </label>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

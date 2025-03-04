@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Güclü Şifrə Generatoru</title>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f9;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #f4f4f9;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+}
+
+body.dark-mode .container {
+  background-color: #444;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+#password {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.options {
+  margin-top: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.theme-switch {
+left: 0;
+top: 0;
+  position: absolute;
+}
+
+body.dark-mode .theme-switch label {
+  color: #fff;
+}
+
+/* Responsiveness */
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Güclü Şifrə Generatoru</h1>
+    <input type="text" id="password" readonly>
+    <button onclick="generatePassword()">Şifrə Yarat</button>
+    
+    <div class="options">
+      <label>
+        <input type="checkbox" id="includeUppercase" checked>
+        Böyük Hərflər
+      </label>
+      <label>
+        <input type="checkbox" id="includeLowercase" checked>
+        Kiçik Hərflər
+      </label>
+      <label>
+        <input type="checkbox" id="includeNumbers" checked>
+        Rəqəmlər
+      </label>
+      <label>
+        <input type="checkbox" id="includeSymbols" checked>
+        Simvollar
+      </label>
+    </div>
+    
+    <div class="theme-switch">
+        <button id="themeToggle"  onchange="toggleTheme()">Tema</button>
+    </div>
+  </div>
+
+<script>
+    // Şifrə yaratma funksiyası
+function generatePassword() {
+  const length = 12; // Şifrə uzunluğu
+  const includeUppercase = document.getElementById('includeUppercase').checked;
+  const includeLowercase = document.getElementById('includeLowercase').checked;
+  const includeNumbers = document.getElementById('includeNumbers').checked;
+  const includeSymbols = document.getElementById('includeSymbols').checked;
+
+  let characters = '';
+  if (includeUppercase) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (includeLowercase) characters += 'abcdefghijklmnopqrstuvwxyz';
+  if (includeNumbers) characters += '0123456789';
+  if (includeSymbols) characters += '!@#$%^&*()-_=+[]{}|;:,.<>?/';
+
+  if (characters === '') {
+    alert('Ən az bir seçim etməlisiniz!');
+    return;
+  }
+
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  document.getElementById('password').value = password;
+}
+
+// Tema dəyişdirmə funksiyası
+function toggleTheme() {
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle.checked) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+</script>
+</body>
+</html>

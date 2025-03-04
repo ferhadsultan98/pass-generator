@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Güclü Şifrə Generatoru</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Güclü Şifrə Generatoru</h1>
+    <input type="text" id="password" readonly>
+    <button onclick="generatePassword()">Şifrə Yarat</button>
+    
+    <div class="options">
+      <label>
+        <input type="checkbox" id="includeUppercase" checked>
+        Böyük Hərflər
+      </label>
+      <label>
+        <input type="checkbox" id="includeLowercase" checked>
+        Kiçik Hərflər
+      </label>
+      <label>
+        <input type="checkbox" id="includeNumbers" checked>
+        Rəqəmlər
+      </label>
+      <label>
+        <input type="checkbox" id="includeSymbols" checked>
+        Simvollar
+      </label>
+    </div>
+    
+    <div class="theme-switch">
+      <label>
+        <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+        Karanlıq Rejim
+      </label>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
